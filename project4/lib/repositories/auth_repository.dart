@@ -25,13 +25,14 @@ class AuthRepository {
         'email': email,
         'password': password,
       });
+
       if (response.statusCode != 200) {
         debug(
             "///ERROR at loginUser with statusCode = ${response.statusCode}, error = ${response.data}///");
         throw Exception(response.data);
       }
       auth = Auth.fromJson(response.data);
-      await updateToken(auth.accessToken, auth.refreshToken);
+      await updateTokenStorage(auth.accessToken, auth.refreshToken);
       Map<String, dynamic> tokenPayload = convertJwtToken(auth.accessToken);
       updateSharedPreferences(tokenPayload);
 

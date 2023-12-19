@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:project4/repositories/auth_repository.dart';
 import 'package:project4/repositories/chapter_repository.dart';
 import 'package:project4/repositories/comics_repository.dart';
+import 'package:project4/repositories/interact_comic_repository.dart';
 import 'package:project4/repositories/user_repository.dart';
 import 'package:project4/screens/home_screen.dart';
 import 'package:project4/utils/constants.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
   GetIt.instance
       .registerLazySingleton<ComicsRepository>(() => ComicsRepository());
   GetIt.instance.registerLazySingleton<AuthRepository>(() => AuthRepository());
+  GetIt.instance.registerLazySingleton<InteractComicRepository>(() => InteractComicRepository());
   GetIt.instance.registerLazySingleton<Dio>(() => Dio());
   GetIt.instance.registerLazySingleton<FlutterSecureStorage>(
       () => const FlutterSecureStorage());
@@ -59,6 +61,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor:
+            Colors.transparent, // Đặt màu nền của Scaffold là trong suốt
+        appBarTheme: AppBarTheme(
+          backgroundColor:
+              Colors.transparent, // Đặt màu nền của AppBar là trong suốt
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       title: 'Comic Reading App',
       home: LayoutBuilder(

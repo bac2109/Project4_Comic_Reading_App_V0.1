@@ -828,8 +828,9 @@ class _AccountScreenState extends State<AccountScreen> {
                         height: boxBack,
                         child: FittedBox(
                           fit: BoxFit.cover,
-                          child: BaseWidget().setImageAsset(
-                              'back_white.png'), // Đường dẫn đến ảnh
+                          child: BaseWidget().setIcon(
+                              iconData:
+                                  Icons.navigate_before), // Đường dẫn đến ảnh
                         ),
                       ),
                       context: context))
@@ -860,8 +861,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     child: Transform.scale(
                       scale: 0.7,
                       // Đặt tỉ lệ thu nhỏ hình ảnh (0.7 là 70% kích thước gốc)
-                      child: BaseWidget().setImageAsset(
-                          'logo_white.png'), // Đường dẫn đến ảnh của bạn
+                      child: BaseWidget().setImageAsset('logo_white.png'),
                     ),
                   ),
                   Container(
@@ -1035,8 +1035,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               child: Transform.scale(
                                 scale: 0.6,
                                 // Đặt tỉ lệ thu nhỏ hình ảnh (0.7 là 70% kích thước gốc)
-                                child: BaseWidget().setImageAsset(
-                                    'logo_google.png'), // Đường dẫn đến ảnh của bạn
+                                child: BaseWidget()
+                                    .setImageAsset('logo_google.png'),
                               ),
                             ),
                           ),
@@ -1055,8 +1055,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               child: Transform.scale(
                                 scale: 0.4,
                                 // Đặt tỉ lệ thu nhỏ hình ảnh (0.7 là 70% kích thước gốc)
-                                child: BaseWidget().setImageAsset(
-                                    'logo_facebook.png'), // Đường dẫn đến ảnh của bạn
+                                child: BaseWidget()
+                                    .setImageAsset('logo_facebook.png'),
                               ),
                             ),
                           ),
@@ -1075,8 +1075,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               child: Transform.scale(
                                 scale: 0.5,
                                 // Đặt tỉ lệ thu nhỏ hình ảnh (0.7 là 70% kích thước gốc)
-                                child: BaseWidget().setImageAsset(
-                                    'logo_apple.png'), // Đường dẫn đến ảnh của bạn
+                                child: BaseWidget()
+                                    .setImageAsset('logo_apple.png'),
                               ),
                             ),
                           ),
@@ -1095,8 +1095,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               child: Transform.scale(
                                 scale: 0.6,
                                 // Đặt tỉ lệ thu nhỏ hình ảnh (0.7 là 70% kích thước gốc)
-                                child: BaseWidget().setImageAsset(
-                                    'logo_twitter.png'), // Đường dẫn đến ảnh của bạn
+                                child: BaseWidget()
+                                    .setImageAsset('logo_twitter.png'),
                               ),
                             ),
                           ),
