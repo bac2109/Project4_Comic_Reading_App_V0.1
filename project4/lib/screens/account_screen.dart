@@ -5,9 +5,9 @@ import 'package:project4/models/app_valid.dart';
 import 'package:project4/repositories/auth_repository.dart';
 import 'package:project4/screens/base_screen.dart';
 import 'package:project4/screens/home_screen.dart';
+import 'package:project4/screens/password%20_retrieval_screen.dart';
 import 'package:project4/utils/util_func.dart';
 import 'package:project4/widgets/base_widget.dart';
-
 import '../models/users/auth.dart';
 import '../utils/constants.dart';
 
@@ -31,6 +31,7 @@ class _AccountScreenState extends State<AccountScreen> {
   double create = 0;
   bool chooseScreen = false;
   bool key = false; // true là đăng kí fales là đăng nhập
+
   ////
   List<TextEditingController> controllers = List.generate(
     6,
@@ -58,7 +59,6 @@ class _AccountScreenState extends State<AccountScreen> {
     fontBack = screenWidth * 0.05;
     create = screenWidth * 0.025;
 
-    super.initState();
     /////////////////////////////////////////////////////////////////////
   }
 
@@ -471,69 +471,85 @@ class _AccountScreenState extends State<AccountScreen> {
                     children: [
                       TextButton(
                         onPressed: () {
-                          TextEditingController _forgotPass =
-                              TextEditingController();
-                          String _errMess = '';
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: const Text('Lấy lại mật khẩu'),
-                              actions: <Widget>[
-                                (_errMess.isNotEmpty || _errMess.isBool)
-                                    ? BaseWidget().setText(
-                                        txt: _errMess,
-                                        color: Colors.red,
-                                        fontSize: 14)
-                                    : Container(),
-                                TextField(
-                                  controller: _forgotPass,
-                                  keyboardType: TextInputType.emailAddress,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Email',
-                                    hintText: 'Enter your email',
-                                  ),
-                                ),
-                                const SizedBox(height: 16.0),
-                                Row(
-                                  children: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'Cancel'),
-                                      child: const Text('Hủy'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        //
-                                        dynamic validMess =
-                                            AppValid(data: _forgotPass.text)
-                                                    .isValidEmail
-                                                ? true
-                                                : "Hay nhap dung email";
-                                        //
-                                        if (validMess is bool && validMess) {
-                                          try {
-                                            await GetIt.instance<
-                                                    AuthRepository>()
-                                                .forgotPassword(
-                                                    email: _forgotPass.text);
-                                          } catch (e) {
-                                            errorMess = e.toString();
-                                          }
-                                          Navigator.pop(context);
-                                        } else {
-                                          setState(() {
-                                            _errMess = validMess;
-                                          });
-                                        }
-                                        //
-                                      },
-                                      child: const Text('Gửi'),
-                                    ),
-                                  ],
-                                )
-                              ],
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PassworRetrieval(),
                             ),
                           );
+                          // TextEditingController _forgotPass =
+                          //     TextEditingController();
+                          // String _errMess = '';
+                          // showDialog<String>(
+                          //   context: context,
+                          //   builder: (BuildContext context) => AlertDialog(
+                          //     title: const Text('Lấy lại mật khẩu'),
+                          //     actions: <Widget>[
+                          //       (_errMess.isNotEmpty || _errMess.isBool)
+                          //           ? BaseWidget().setText(
+                          //               txt: _errMess,
+                          //               color: Colors.red,
+                          //               fontSize: 14)
+                          //           : Container(),
+                          //       TextField(
+                          //         controller: _forgotPass,
+                          //         keyboardType: TextInputType.emailAddress,
+                          //         decoration: InputDecoration(
+                          //           labelText: 'Email',
+                          //           hintText: 'Enter your email',
+                          //           prefixIcon: Icon(Icons.email),
+                          //           suffixIcon: IconButton(
+                          //             icon: Icon(Icons.send),
+                          //             onPressed: () {
+                          //               // Xử lý khi nút được nhấn
+                          //               print('Nút Gửi được nhấn');
+                          //             },
+                          //           ),
+                          //         ),
+                          //       ),
+                          //       const SizedBox(height: 16.0),
+
+                          //       // Row(
+                          //       //   children: [
+                          //       //     TextButton(
+                          //       //       onPressed: () =>
+                          //       //           Navigator.pop(context, 'Cancel'),
+                          //       //       child: const Text('Hủy'),
+                          //       //     ),
+                          //       //     TextButton(
+                          //       //       onPressed: () async {
+                          //       //         //
+                          //       //         dynamic validMess =
+                          //       //             AppValid(data: _forgotPass.text)
+                          //       //                     .isValidEmail
+                          //       //                 ? true
+                          //       //                 : "Hay nhap dung email";
+                          //       //         //
+                          //       //         if (validMess is bool && validMess) {
+                          //       //           try {
+                          //       //             await GetIt.instance<
+                          //       //                     AuthRepository>()
+                          //       //                 .forgotPassword(
+                          //       //                     email: _forgotPass.text);
+                          //       //           } catch (e) {
+                          //       //             errorMess = e.toString();
+                          //       //           }
+                          //       //           Navigator.pop(context);
+                          //       //         } else {
+                          //       //           setState(() {
+                          //       //             _errMess = validMess;
+                          //       //           });
+                          //       //         }
+                          //       //         //
+                          //       //       },
+                          //       //       child: const Text('Gửi'),
+                          //       //     ),
+
+                          //       //   ],
+                          //       // )
+                          //     ],
+                          //   ),
+                          // );
                         },
                         child: Text(
                           'Quên mật khẩu ?',
@@ -1007,6 +1023,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(
                                 5), // Adjust the padding as needed
+
                             child: Container(
                               height: double.infinity,
                               decoration: BoxDecoration(
